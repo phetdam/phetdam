@@ -17,19 +17,6 @@ standalone shared object wrapped with ctypes__.
 
 .. __: https://docs.python.org/3/library/ctypes.html
 
-
-Preferred tools
----------------
-
-:Languages: Python 3, C
-:Build: gcc, make
-:CI + testing: `Travis CI`__
-:Docs: Sphinx__
-
-.. __: https://travis-ci.org/
-
-.. __: https://www.sphinx-doc.org/en/master/
-
 A sentiment
 -----------
 
