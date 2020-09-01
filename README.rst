@@ -41,4 +41,4 @@ A sentiment
 
 .. code:: bash
 
-   gcc -o sentiment sentiment.c
+   gcc -o sentiment sentiment.c && ./sentiment
