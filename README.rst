@@ -44,10 +44,7 @@ A sentiment
    #define __boolean(x, y) !(((x) ^ (y)) && ((x) < (y)))
 
    const char *int2str(int i) {
-     if (i == 0) {
-       return _str_false;
-     }
-     return _str_true;
+     return !i ? _str_false : _str_true;
    }
 
    int main(int argc, char *argv) {
