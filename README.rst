@@ -7,11 +7,11 @@ Just an undergrad interested in financial math, machine learning, scientific +
 distributed computing, and software development. Most of my work is in Python,
 although recently I've been interested in building Python packages that are a
 mixture of ``.py`` files and compiled shared objects. See the in-development
-`c_numpy_demo`__ repository for an evolving example of how to combine pure
-Python with a C extension module, access to the `NumPy C API`__, and a
-standalone shared object wrapped with ctypes__.
+`c_npy_demo`__ repository for an evolving example of how to combine pure Python
+with a C extension module, access to the `NumPy C API`__, and a standalone
+shared object wrapped with ctypes__.
 
-.. __: https://github.com/phetdam/c_numpy_demo
+.. __: https://github.com/phetdam/c_npy_demo
 
 .. __: https://numpy.org/doc/stable/reference/c-api/index.html
 
