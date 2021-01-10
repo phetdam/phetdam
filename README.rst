@@ -25,18 +25,17 @@ A sentiment
    /* sentiment.c */
 
    #include <stdio.h>
+   #include <stdlib.h>
 
-   #define _str_true "true"
-   #define _str_false "false"
    #define __boolean(x, y) !(((x) ^ (y)) && ((x) < (y)))
 
    const char *int2str(int i) {
-     return !i ? _str_false : _str_true;
+     return !i ? "false" : "true";
    }
 
-   int main(int argc, char *argv) {
+   int main(int argc, char **argv) {
      printf("be %s to yourself\n", int2str(__boolean(5, 3)));
-     return 0;
+     return EXIT_SUCCESS;
    }
 
 .. code:: bash
