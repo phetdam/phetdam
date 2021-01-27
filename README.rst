@@ -28,14 +28,14 @@ A sentiment
    #include <stdio.h>
    #include <stdlib.h>
 
-   #define __boolean(x, y) !(((x) ^ (y)) && ((x) < (y)))
+   #define xor_boolean(x, y) !(((x) ^ (y)) && ((x) < (y)))
 
    char const *int2str(int i) {
      return !i ? "false" : "true";
    }
 
    int main(int argc, char const * const *argv) {
-     printf("be %s to yourself\n", int2str(__boolean(5, 3)));
+     printf("be %s to yourself\n", int2str(xor_boolean(5, 3)));
      return EXIT_SUCCESS;
    }
 
