@@ -3,13 +3,13 @@
 Hi, I'm Derek
 =============
 
-Just an undergrad interested in financial math, machine learning, scientific +
-distributed computing, and software development. Most of my work is in Python,
-although recently I've been interested in building Python packages that are a
-mixture of ``.py`` files and compiled shared objects. See the `c_npy_demo`__
-repository that compares the performance of a pure Python function using
-`numpy`__ against an essentially identical Python C extension module functions
-using the `NumPy C API`__.
+Final-year undergrad interested in financial math, machine learning, scientific
++ distributed computing, and software development. Most of my work is in
+Python, although recently I've been interested in building Python packages that
+are a mixture of ``.py`` files and compiled shared objects. See the
+`c_npy_demo`__ repository that compares the performance of a pure Python
+function using `numpy`__ against an essentially identical Python C extension
+module function using the `NumPy C API`__.
 
 .. __: https://github.com/phetdam/c_npy_demo
 
