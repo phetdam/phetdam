@@ -3,7 +3,7 @@
 Hi, I'm Derek
 =============
 
-Final-year undergrad interested in financial math, machine learning, scientific
+Recent graduate interested in financial math, machine learning, scientific
 + distributed computing, and software development. Most of my work is in
 Python, although recently I've been interested in building Python packages that
 are a mixture of ``.py`` files and compiled shared objects. See the
