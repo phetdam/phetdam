@@ -16,31 +16,15 @@ using the `NumPy C API`__.
 
 .. __: https://numpy.org/doc/stable/reference/c-api/index.html
 
+Here's a toy norm-constrained convex optimization problem and a plot of its
+solution against the objective's minimum.
 
-A sentiment
------------
+|problem| |contours|
 
-.. code:: c
+.. |problem| image:: https://raw.githubusercontent.com/phetdam/phetdam/master/
+   quad_norm.png
+   :alt: quad_norm.png
 
-   /* sentiment.c */
-
-   #include <stdio.h>
-   #include <stdlib.h>
-
-   #define xor_boolean(x, y) !(((x) ^ (y)) && ((x) < (y)))
-
-   char const *int2str(int i) {
-     return !i ? "false" : "true";
-   }
-
-   int main(int argc, char const * const *argv) {
-     printf("be %s to yourself\n", int2str(xor_boolean(5, 3)));
-     return EXIT_SUCCESS;
-   }
-
-.. code:: bash
-
-   gcc -o sentiment sentiment.c && ./sentiment
-
-.. image:: https://raw.githubusercontent.com/phetdam/phetdam/master/contours.png
+.. |contours| image:: https://raw.githubusercontent.com/phetdam/phetdam/master/
+   contours.png
    :alt: contours.png

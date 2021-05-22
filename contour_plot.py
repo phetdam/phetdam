@@ -11,6 +11,7 @@ Script should be run from the terminal. Pass --help for usage.
 # pylint: disable=import-error
 import argparse
 from functools import partial
+import matplotlib
 import matplotlib.pyplot as plt
 from matplotlib.patches import Circle
 import numpy as np
@@ -84,7 +85,7 @@ def css2tuple(s):
 
 
 def exec_main(
-    min_point=(2, 3), threshold=1., fig_height=(6.4, 4.8),
+    min_point=(3, 2), threshold=1., fig_height=3.,
     n_samples=100, file_name="contours.png"
 ):
     """Main executing method of the that drives all the computations.
@@ -93,11 +94,11 @@ def exec_main(
 
     Parameters
     ----------
-    min_point : tuple, default=(2, 3)
+    min_point : tuple, default=(3, 2)
         Minimizer of the unconstrained problem.
     threshold : float, default=1.
         Maximum 2-norm of the constrained solution.
-    fig_height : float, default=(6.4, 4.8)
+    fig_height : float, default=3.
         Height of the resulting figure. The actual (width, height) of the
         figure is (2 * x1 + 1.2 * threshold, 2 * x2 + 1.2 * threshold) scaled
         so that the height is fig_height.
@@ -151,7 +152,12 @@ def exec_main(
         Circle((0, 0), radius=threshold, alpha=0.5, color="blue", zorder=10)
     )
     # plot the optimal unconstrained and constrained points (plot on top)
-    ax.scatter([x1, x_hat[0]], [x2, x_hat[1]], marker="x", c="red", zorder=20)
+    ax.scatter(x1, x2, marker="d", c="orange", zorder=20)
+    ax.scatter(
+        x_hat[0], x_hat[1], marker="x",
+        s=(1.2 * matplotlib.rcParams["lines.markersize"]) ** 2,
+        c="red", zorder=20
+    )
     # compute levels based on number of xticks. last level is objective value
     levels = np.linspace(
         0, quad_func(x_hat), num=(1 + ax.get_xticks().size) // 2
@@ -192,7 +198,7 @@ def main(args=None):
         "-t", "--threshold", type=p_float, default=1., help=_HELP_THRESHOLD
     )
     arp.add_argument(
-        "-H", "--fig-height", type=p_float, default=4., help=_HELP_FIG_HEIGHT
+        "-H", "--fig-height", type=p_float, default=3., help=_HELP_FIG_HEIGHT
     )
     arp.add_argument(
         "-n", "--n-samples", type=p_int, default=100, help=_HELP_N_SAMPLES
