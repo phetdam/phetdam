@@ -3,10 +3,9 @@
 Hi, I'm Derek
 =============
 
-Recent graduate interested in financial math, machine learning, scientific
-+ distributed computing, and software development. Most of my work is in
-Python, although recently I've been interested in building Python packages that
-are a mixture of ``.py`` files and compiled shared objects. See the
+Recent graduate broadly interested in optimization, machine learning, and
+scientific computing. Most of my work is in Python, although recently I've been
+interested in building Python packages that mix Python and C code. See the
 `c_npy_demo`__ repository that compares the performance of a pure Python
 function using `numpy`__ against an essentially identical Python C extension
 module function using the `NumPy C API`__.
