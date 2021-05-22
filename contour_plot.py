@@ -149,13 +149,13 @@ def exec_main(
     fig, ax = plt.subplots(figsize=(fwidth, fheight))
     # plot norm constraint (plot above contours)
     ax.add_patch(
-        Circle((0, 0), radius=threshold, alpha=0.5, color="blue", zorder=10)
+        Circle((0, 0), radius=threshold, alpha=0.4, color="blue", zorder=10)
     )
     # plot the optimal unconstrained and constrained points (plot on top)
     ax.scatter(x1, x2, marker="d", c="orange", zorder=20)
     ax.scatter(
         x_hat[0], x_hat[1], marker="x",
-        s=(1.2 * matplotlib.rcParams["lines.markersize"]) ** 2,
+        #s=(1.2 * matplotlib.rcParams["lines.markersize"]) ** 2,
         c="red", zorder=20
     )
     # compute levels based on number of xticks. last level is objective value
