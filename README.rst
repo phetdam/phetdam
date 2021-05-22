@@ -21,7 +21,7 @@ of its solution against the objective's minimum. The code used to solve the
 problem and generate the contour and constraint plot can be found in
 `my profile repository`__.
 
-. __: https://github.com/phetdam/phetdam
+.. __: https://github.com/phetdam/phetdam
 
 |problem| |contours|
 
