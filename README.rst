@@ -18,8 +18,7 @@ using the `NumPy C API`__.
 
 For fun, here's a toy norm-constrained convex optimization problem and a plot
 of its solution against the objective's minimum. The code used to solve the
-problem and generate the contour and constraint plot can be found in
-`my profile repository`__.
+problem and generate the plot can be found in `my profile repository`__.
 
 .. __: https://github.com/phetdam/phetdam
 
