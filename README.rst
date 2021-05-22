@@ -42,3 +42,6 @@ A sentiment
 .. code:: bash
 
    gcc -o sentiment sentiment.c && ./sentiment
+
+.. image:: https://raw.githubusercontent.com/phetdam/phetdam/master/contours.png
+   :alt: contours.png
