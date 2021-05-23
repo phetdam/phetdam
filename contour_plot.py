@@ -3,6 +3,9 @@ __doc__ = """Generate the contour plot shown in the README.rst.
 Level sets of the objective, the unconstrained solution, and the constrained
 solution are plotted using matplotlib. Solution obtained using trust-constr.
 
+Function minimized is a convex bivariate quadratic function. The constraint is
+an L2 norm constraint requiring the solution to be at most unit norm.
+
 Script should be run from the terminal. Pass --help for usage.
 
 .. codeauthor:: Derek Huang <djh458@stern.nyu.edu>
@@ -116,9 +119,19 @@ def exec_main(
     x1, x2 = min_point
     min_point = np.array(min_point)
     # function, gradient, and hessian
-    quad_func = lambda x: 0.5 * (x[0] - x1) ** 2 + (x[1] - x2) ** 2
-    quad_grad = lambda x: np.array([(x[0] - x1), 2 * (x[1] - x2)])
-    quad_hess = lambda x: np.array([[1, 0], [0, 2]])
+    quad_func = lambda x: (
+        0.5 * (x[0] - x1) ** 2 + (x[1] - x2) ** 2 +
+        0.5 * (x[0] - x1) * (x[1] - x2)
+    )
+    quad_grad = lambda x: (
+        np.array(
+            [
+                (x[0] - x1 + 0.5 * (x[1] - x2)),
+                2 * (x[1] - x2) + 0.5 * (x[0] - x1)
+            ]
+        )
+    )
+    quad_hess = lambda x: np.array([[1, 0.5], [0.5, 2]])
     # L2 norm constraint on solution
     norm_constraint = NonlinearConstraint(
         lambda x: np.power(x, 2).sum(), -(threshold ** 2), threshold ** 2,
