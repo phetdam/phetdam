@@ -4,7 +4,8 @@ Level sets of the objective, the unconstrained solution, and the constrained
 solution are plotted using matplotlib. Solution obtained using trust-constr.
 
 Function minimized is a convex bivariate quadratic function. The constraint is
-an L2 norm constraint requiring the solution to be at most unit norm.
+an L1 norm constraint requiring the solution to be at most unit norm, although
+the threshold value can be adjusted by the user.
 
 Script should be run from the terminal. Pass --help for usage.
 
@@ -16,9 +17,9 @@ import argparse
 from functools import partial
 import matplotlib
 import matplotlib.pyplot as plt
-from matplotlib.patches import Circle
+from matplotlib.patches import Circle, Polygon
 import numpy as np
-from scipy.optimize import NonlinearConstraint, minimize
+from scipy.optimize import LinearConstraint, NonlinearConstraint, minimize
 import sys
 
 
@@ -118,6 +119,7 @@ def exec_main(
     # get separated x1, x2 + convert to numpy array
     x1, x2 = min_point
     min_point = np.array(min_point)
+    print(f"unconstrained solution: {min_point}")
     # function, gradient, and hessian
     quad_func = lambda x: (
         0.5 * (x[0] - x1) ** 2 + (x[1] - x2) ** 2 +
@@ -132,16 +134,19 @@ def exec_main(
         )
     )
     quad_hess = lambda x: np.array([[1, 0.5], [0.5, 2]])
-    # L2 norm constraint on solution
-    norm_constraint = NonlinearConstraint(
-        lambda x: np.power(x, 2).sum(), -(threshold ** 2), threshold ** 2,
-        jac=lambda x: 2 * x, hess=lambda x, v: 2 * v * np.eye(2)
-    )
+    # L1 norm constraint on solution, rewritten as linear constraints
+    norm_constraint = [
+        LinearConstraint(np.ones(2), -np.inf, threshold),
+        LinearConstraint(-np.ones(2), -np.inf, threshold),
+        LinearConstraint([[-1, 0], [0, 1]], -np.inf, threshold),
+        LinearConstraint([[1, 0], [0, -1]], -np.inf, threshold)
+    ]
     # compute solution to constrained problem
     x_hat = minimize(
         quad_func, np.zeros(2), method="trust-constr", jac=quad_grad,
         hess=quad_hess, constraints=norm_constraint
     ).x
+    print(f"constrained solution:   {x_hat}")
     # x, y coordinate grids to plot objective contours over
     x_grid, y_grid = np.meshgrid(
         np.linspace(-1.2 * threshold, 2 * x1, num=n_samples),
@@ -162,7 +167,10 @@ def exec_main(
     fig, ax = plt.subplots(figsize=(fwidth, fheight))
     # plot norm constraint (plot above contours)
     ax.add_patch(
-        Circle((0, 0), radius=threshold, alpha=0.4, color="blue", zorder=10)
+        Polygon(
+            np.array([[-1, 0], [0, 1], [1, 0], [0, -1]]),
+            alpha=0.4, color="blue", zorder=10
+        )
     )
     # plot the optimal unconstrained and constrained points (plot on top)
     ax.scatter(x1, x2, marker="d", c="orange", zorder=20)
@@ -175,11 +183,13 @@ def exec_main(
     levels = np.linspace(
         0, quad_func(x_hat), num=(1 + ax.get_xticks().size) // 2
     )
-    # plot objective contours up to intersection
+    # plot objective contours up to intersection and equalize axes scaling
     ax.contour(x_grid, y_grid, f_vals, levels=levels)
+    ax.set_aspect("equal")
     # make tight and save
     fig.tight_layout()
     fig.savefig(file_name)
+    print(f"plot saved to {file_name}")
 
 
 def main(args=None):
