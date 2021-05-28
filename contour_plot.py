@@ -17,9 +17,9 @@ import argparse
 from functools import partial
 import matplotlib
 import matplotlib.pyplot as plt
-from matplotlib.patches import Circle, Polygon
+from matplotlib.patches import Polygon
 import numpy as np
-from scipy.optimize import LinearConstraint, NonlinearConstraint, minimize
+from scipy.optimize import LinearConstraint, minimize
 import sys
 
 
@@ -168,7 +168,12 @@ def exec_main(
     # plot norm constraint (plot above contours)
     ax.add_patch(
         Polygon(
-            np.array([[-1, 0], [0, 1], [1, 0], [0, -1]]),
+            np.array(
+                [
+                    [-threshold, 0], [0, threshold],
+                    [threshold, 0], [0, -threshold]
+                ]
+            ),
             alpha=0.4, color="blue", zorder=10
         )
     )
