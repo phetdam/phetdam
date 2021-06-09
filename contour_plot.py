@@ -15,7 +15,6 @@ Script should be run from the terminal. Pass --help for usage.
 # pylint: disable=import-error
 import argparse
 from functools import partial
-import matplotlib
 import matplotlib.pyplot as plt
 from matplotlib.patches import Polygon
 import numpy as np
@@ -179,14 +178,10 @@ def exec_main(
     )
     # plot the optimal unconstrained and constrained points (plot on top)
     ax.scatter(x1, x2, marker="d", c="orange", zorder=20)
-    ax.scatter(
-        x_hat[0], x_hat[1], marker="x",
-        #s=(1.2 * matplotlib.rcParams["lines.markersize"]) ** 2,
-        c="red", zorder=20
-    )
+    ax.scatter(x_hat[0], x_hat[1], marker="x", c="red", zorder=20)
     # compute levels based on number of xticks. last level is objective value
     levels = np.linspace(
-        0, quad_func(x_hat), num=(1 + ax.get_xticks().size) // 2
+        0, quad_func(x_hat), num=int(0.6 * ax.get_xticks().size)
     )
     # plot objective contours up to intersection and equalize axes scaling
     ax.contour(x_grid, y_grid, f_vals, levels=levels)
