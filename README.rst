@@ -22,7 +22,7 @@ problem and generate the plot can be found in `my profile repository`__.
 
 .. __: https://github.com/phetdam/phetdam
 
-|problem| |contours|
+|contours|
 
 .. |problem| image:: https://raw.githubusercontent.com/phetdam/phetdam/master/
    quad_norm.png

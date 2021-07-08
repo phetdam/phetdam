@@ -25,7 +25,7 @@ import sys
 _HELP_MIN_POINT = """\
 Minimizer of the unconstrained problem. Should be in the format x1,x2. \
 """
-_HELP_THRESHOLD = "Maximum value the 2-norm of the solution can take."
+_HELP_THRESHOLD = "Maximum value the 1-norm of the solution can take."
 _HELP_FIG_HEIGHT = """\
 Height of the resulting figure in inches. The width of the figure is given \
 by (2 * x1 + 1.2 * THRESHOLD) * FIG_HEIGHT / (2 * x2 + 1.2 * THRESHOLD).\
@@ -100,7 +100,7 @@ def exec_main(
     min_point : tuple, default=(3, 2)
         Minimizer of the unconstrained problem.
     threshold : float, default=1.
-        Maximum 2-norm of the constrained solution.
+        Maximum 1-norm of the constrained solution.
     fig_height : float, default=3.
         Height of the resulting figure. The actual (width, height) of the
         figure is (2 * x1 + 1.2 * threshold, 2 * x2 + 1.2 * threshold) scaled
@@ -148,8 +148,8 @@ def exec_main(
     print(f"constrained solution:   {x_hat}")
     # x, y coordinate grids to plot objective contours over
     x_grid, y_grid = np.meshgrid(
-        np.linspace(-1.2 * threshold, 2 * x1, num=n_samples),
-        np.linspace(-1.2 * threshold, 2 * x2, num=n_samples)
+        np.linspace(-1.2 * threshold, 2.3 * x1, num=n_samples),
+        np.linspace(-1.2 * threshold, 2.3 * x2, num=n_samples)
     )
     # compute objective values on grid for contour plot
     f_vals = np.empty(x_grid.shape)
@@ -159,13 +159,14 @@ def exec_main(
     ## plotting of contours and constraints ##
     # compute width and height scaled so height = fig_height
     fwidth = (
-        (2 * x1 + 1.2 * threshold) * fig_height / (2 * x2 + 1.2 * threshold)
+        (2.3 * x1 + 1.3 * threshold) * fig_height / (2.3 * x2 + 1.3 * threshold)
     )
     fheight = fig_height
     # create figure using fwidth, fheight
     fig, ax = plt.subplots(figsize=(fwidth, fheight))
-    # plot norm constraint (plot above contours)
-    ax.add_patch(
+    # plot norm constraint (plot above contours). save the returned Patch so
+    # we can set its label for the legend later.
+    norm_patch = ax.add_patch(
         Polygon(
             np.array(
                 [
@@ -179,13 +180,36 @@ def exec_main(
     # plot the optimal unconstrained and constrained points (plot on top)
     ax.scatter(x1, x2, marker="d", c="orange", zorder=20)
     ax.scatter(x_hat[0], x_hat[1], marker="x", c="red", zorder=20)
-    # compute levels based on number of xticks. last level is objective value
     levels = np.linspace(
         0, quad_func(x_hat), num=int(0.6 * ax.get_xticks().size)
     )
-    # plot objective contours up to intersection and equalize axes scaling
+    # plot area covered by the objective contours. we save the QuadContourSet
+    # for when we need to set the labels in the legend later.
+    contourf_set = ax.contourf(
+        x_grid, y_grid, f_vals, levels=levels, alpha=0.15, colors="red"
+    )
+    # plot contours of the function itself
     ax.contour(x_grid, y_grid, f_vals, levels=levels)
+    # set labels for function highlight area under the contours and the norm
+    # constraint. to get the color entry in the legend, we make an empty
+    # Patch using a Polygon that is a single point with the same color.
+    dummy_patch = ax.add_patch(
+        Polygon(
+            np.zeros(4).reshape(2, 2),
+            # get_facecolor returns list of RGBA, so we drop a dimension
+            color=contourf_set.collections[0].get_facecolor().squeeze()
+        )
+    )
+    # order of setting labels matters, so set dummy_patch label first with the
+    # objective before setting the norm constraint label
+    dummy_patch.set_label(
+        r"$ \frac{1}{2}(x_1 - 3)^2 + (x_2 - 2)^2 + "
+        r"\frac{1}{2}(x_1 - 3)(x_2 - 2) $"
+    )
+    norm_patch.set_label(r"$ |x_1| + |x_2| \leq 1 $")
+    # equalize axes scaling + activate legends in bottom right
     ax.set_aspect("equal")
+    ax.legend()
     # make tight and save
     fig.tight_layout()
     fig.savefig(file_name)
