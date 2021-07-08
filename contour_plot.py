@@ -201,15 +201,16 @@ def exec_main(
         )
     )
     # order of setting labels matters, so set dummy_patch label first with the
-    # objective before setting the norm constraint label
-    dummy_patch.set_label(
-        r"$ \frac{1}{2}(x_1 - 3)^2 + (x_2 - 2)^2 + "
-        r"\frac{1}{2}(x_1 - 3)(x_2 - 2) $"
-    )
-    norm_patch.set_label(r"$ |x_1| + |x_2| \leq 1 $")
-    # equalize axes scaling + activate legends in bottom right
+    # objective before setting the norm constraint label. equalize axes scaling
     ax.set_aspect("equal")
-    ax.legend()
+    ax.legend(
+        [dummy_patch, norm_patch],
+        [
+            r"$ \frac{1}{2}(x_1 - 3)^2 + (x_2 - 2)^2 + "
+            r"\frac{1}{2}(x_1 - 3)(x_2 - 2) $",
+            r"$ |x_1| + |x_2| \leq 1 $"
+        ]
+    )
     # make tight and save
     fig.tight_layout()
     fig.savefig(file_name)
