@@ -22,11 +22,10 @@ problem and generate the plot can be found in `my profile repository`__.
 
 .. __: https://github.com/phetdam/phetdam
 
-|contours|
-
-.. |problem| image:: https://raw.githubusercontent.com/phetdam/phetdam/master/
-   quad_norm.png
-   :alt: quad_norm.png
+.. figure:: https://raw.githubusercontent.com/phetdam/phetdam/master/
+   contours.png
+   :align: center
+   :alt: contours.png
 
 .. |contours| image:: https://raw.githubusercontent.com/phetdam/phetdam/master/
    contours.png
