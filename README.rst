@@ -7,7 +7,7 @@ Recent graduate broadly interested in optimization, machine learning, and
 scientific computing. Most of my work is in Python, although recently I've been
 interested in building Python C extensions to speed up computations, using the
 `Python C API`__ and `NumPy C API`__ to work with Python objects on the C
-level. For example, the `numpy-lapacke-demo`__ package [#]_ implements linear
+level. For example, the `numpy-lapacke-demo`__ package implements linear
 regression and Newton's method with diagonal Hessian modification in C
 extensions, performing the computations using `CBLAS`__\ /\ `LAPACKE`__
 routines operating directly on NumPy array memory. All public and private
@@ -24,8 +24,6 @@ methods are also rigorously unit tested using `pytest`__.
 .. __: https://www.netlib.org/lapack/lapacke.html
 
 .. __: https://docs.pytest.org/en/stable/
-
-.. [#] There will soon be wheels available on PyPI.
 
 For fun, here's a toy norm-constrained convex optimization problem and a plot
 of its solution against the objective's minimum. The code used to solve the
