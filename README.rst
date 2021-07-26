@@ -13,6 +13,8 @@ extensions, performing the computations using `CBLAS`__\ /\ `LAPACKE`__
 routines operating directly on NumPy array memory. All public and private
 methods are also rigorously unit tested using `pytest`__.
 
+.. __: https://docs.python.org/3/c-api/index.html
+
 .. __: https://numpy.org/doc/stable/reference/c-api/index.html
 
 .. __: https://github.com/phetdam/numpy-lapacke-demo
