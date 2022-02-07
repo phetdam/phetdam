@@ -1,4 +1,4 @@
-__doc__ = """Generate the contour plot shown in the README.rst.
+"""Generate the contour plot shown in the README.rst.
 
 Level sets of the objective, the unconstrained solution, and the constrained
 solution are plotted using matplotlib. Solution obtained using trust-constr.
@@ -12,14 +12,16 @@ Script should be run from the terminal. Pass --help for usage.
 .. codeauthor:: Derek Huang <djh458@stern.nyu.edu>
 """
 
-# pylint: disable=import-error
 import argparse
 from functools import partial
-import matplotlib.pyplot as plt
-from matplotlib.patches import Polygon
-import numpy as np
-from scipy.optimize import LinearConstraint, minimize
 import sys
+
+from scipy.optimize import LinearConstraint, minimize
+import numpy as np
+# pylint: disable=import-error
+import matplotlib.pyplot as plt  # type: ignore
+from matplotlib.patches import Polygon  # type: ignore
+# pylint: enable=import-error
 
 
 _HELP_MIN_POINT = """\
@@ -37,6 +39,7 @@ plot. Increasing the value improves the smoothness of the contours.\
 _HELP_FILE_NAME = "Name of file to save the matplotlib-generated figure to."
 
 
+# pylint: disable=invalid-name
 def p_float(x):
     """Attempts to convert x to positive float.
 
@@ -87,9 +90,13 @@ def css2tuple(s):
     return tuple(map(float, s.split(",")))
 
 
+# pylint: disable=bad-continuation
 def exec_main(
-    min_point=(3, 2), threshold=1., fig_height=3.,
-    n_samples=100, file_name="contours.png"
+    min_point=(3, 2),
+    threshold=1.,
+    fig_height=3.,
+    n_samples=100,
+    file_name="contours.png"
 ):
     """Main executing method of the that drives all the computations.
 
@@ -159,7 +166,8 @@ def exec_main(
     ## plotting of contours and constraints ##
     # compute width and height scaled so height = fig_height
     fwidth = (
-        (2.3 * x1 + 1.3 * threshold) * fig_height / (2.3 * x2 + 1.3 * threshold)
+        (2.3 * x1 + 1.3 * threshold) * fig_height /
+        (2.3 * x2 + 1.3 * threshold)
     )
     fheight = fig_height
     # create figure using fwidth, fheight
@@ -174,7 +182,9 @@ def exec_main(
                     [threshold, 0], [0, -threshold]
                 ]
             ),
-            alpha=0.4, color="blue", zorder=10
+            alpha=0.4,
+            color="blue",
+            zorder=10
         )
     )
     # plot the optimal unconstrained and constrained points (plot on top)
@@ -240,7 +250,11 @@ def main(args=None):
     )
     # add arguments
     arp.add_argument(
-        "-m", "--min-point", type=css2tuple, default="3,2", help=_HELP_MIN_POINT
+        "-m",
+        "--min-point",
+        type=css2tuple,
+        default="3,2",
+        help=_HELP_MIN_POINT
     )
     arp.add_argument(
         "-t", "--threshold", type=p_float, default=1., help=_HELP_THRESHOLD
@@ -252,15 +266,20 @@ def main(args=None):
         "-n", "--n-samples", type=p_int, default=100, help=_HELP_N_SAMPLES
     )
     arp.add_argument(
-        "-f", "--file-name", type=str,
-        default="contours.png", help=_HELP_FILE_NAME
+        "-f",
+        "--file-name",
+        type=str,
+        default="contours.png",
+        help=_HELP_FILE_NAME
     )
     # parse arguments
     args = arp.parse_args(args=args)
     # run main execution method
     exec_main(
-        min_point=args.min_point, threshold=args.threshold,
-        fig_height=args.fig_height, n_samples=args.n_samples,
+        min_point=args.min_point,
+        threshold=args.threshold,
+        fig_height=args.fig_height,
+        n_samples=args.n_samples,
         file_name=args.file_name
     )
     return 0
