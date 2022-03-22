@@ -16,11 +16,12 @@ import argparse
 from functools import partial
 import sys
 
-from scipy.optimize import LinearConstraint, minimize
 import numpy as np
+from scipy.optimize import LinearConstraint, minimize
 # pylint: disable=import-error
-import matplotlib.pyplot as plt  # type: ignore
 from matplotlib.patches import Polygon  # type: ignore
+from matplotlib import pyplot as plt  # type: ignore
+from matplotlib import rc_context  # type: ignore
 # pylint: enable=import-error
 
 
@@ -223,7 +224,8 @@ def exec_main(
     )
     # make tight and save
     fig.tight_layout()
-    fig.savefig(file_name)
+    with rc_context({"savefig.facecolor": "gray"}):
+        fig.savefig(file_name)
     print(f"plot saved to {file_name}")
 
 
