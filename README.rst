@@ -15,8 +15,7 @@ solve the problem and generate the plot can be found in
 
 .. __: https://github.com/phetdam/phetdam
 
-.. image:: https://raw.githubusercontent.com/phetdam/phetdam/master/
-   contours.png
+.. image:: https://raw.githubusercontent.com/phetdam/phetdam/master/contours.png
    :alt: contours.png
 
 Recent activity
