@@ -4,9 +4,8 @@ Hi, I'm Derek
 =============
 
 Recent graduate [#]_ broadly interested in optimization, machine learning, and
-scientific computing, mainly using Python, C++, and C. Most of my older personal
-and professional work is in Python although in the past years I have done much
-with C++, namely C++17 and C++20.
+scientific computing, mainly using Python, C++, and C. In particular, most of
+work has been done via Python, C++17, and C++20.
 
 For fun, here's a toy norm-constrained convex optimization problem and a plot
 of its solution against the objective's minimum. The Python script used to
