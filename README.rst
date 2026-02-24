@@ -23,9 +23,9 @@ Selected projects
 npyglue_
    C++ project aimed at simplifying creation of NumPy arrays from C++ objects
    providing the backing memory. Supported backing objects include STL vectors,
-   Armadillo_ and Eigen_ matrices, and `PyTorch C++`_ tensors. Integration
-   layers include the Python C/C++ API layer and SWIG_ integration via custom
-   typemaps.
+   Armadillo_ and Eigen_ matrices, and `PyTorch C++`_ CPU/GPU tensors.
+   Integration layers include the Python C/C++ API layer and SWIG_. Unit and
+   integration tests in C++/Python are all orchestrated with CTest_.
 
 .. _Armadillo: https://arma.sourceforge.net/
 
@@ -34,6 +34,8 @@ npyglue_
 .. _PyTorch C++: https://docs.pytorch.org/cppdocs/
 
 .. _SWIG: https://www.swig.org/
+
+.. _CTest: https://cmake.org/cmake/help/latest/manual/ctest.1.html
 
 numpy-lapacke-demo_
    Python C extension implementations of linear regression using QR/SVD and
