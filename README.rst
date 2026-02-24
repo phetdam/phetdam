@@ -20,6 +20,21 @@ solve the problem and generate the plot can be found in
 Selected projects
 -----------------
 
+npyglue_
+   C++ project aimed at simplifying creation of NumPy arrays from C++ objects
+   providing the backing memory. Supported backing objects include STL vectors,
+   Armadillo_ and Eigen_ matrices, and `PyTorch C++`_ tensors. Integration
+   layers include the Python C/C++ API layer and SWIG_ integration via custom
+   typemaps.
+
+.. _Armadillo: https://arma.sourceforge.net/
+
+.. _Eigen: https://libeigen.gitlab.io/
+
+.. _PyTorch C++: https://docs.pytorch.org/cppdocs/
+
+.. _SWIG: https://www.swig.org/
+
 numpy-lapacke-demo_
    Python C extension implementations of linear regression using QR/SVD and
    Newton's method with diagonal Hessian modification using the `Python C API`_
@@ -31,6 +46,8 @@ numpy-lapacke-demo_
 .. _Python C API: https://docs.python.org/3/c-api/index.html
 
 .. _NumPy C API: https://numpy.org/doc/stable/reference/c-api/index.html
+
+.. _npyglue: https://github.com/phetdam/npyglue
 
 .. _numpy-lapacke-demo: https://github.com/phetdam/numpy-lapacke-demo
 
